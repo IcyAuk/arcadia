@@ -1,0 +1,5 @@
+/* this css overrides anything written before */
+
+.hidden{
+    display: none;
+}

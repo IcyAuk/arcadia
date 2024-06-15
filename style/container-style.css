@@ -1,0 +1,258 @@
+/* NEW STYLE SHEET DEDICATED TO CONTAINERS, ARTICLES, SECTIONS, HEROS AND THEIR ITEMS*/
+/*
+*   DESKTOP RESOLUTIONS
+*/
+
+/* global */
+
+.text-white{
+    color: white;
+}
+
+/* Font */
+.container-col h2,
+.container-row h2 {
+    font-size: 25px;
+    font-weight: bolder;
+    overflow: hidden;
+}
+
+.section-form{
+    font-size: 18px;
+}
+
+.section-container h2{
+    font-size: 30px;;
+}
+
+.container-col p,
+.container-row p {
+    overflow: hidden;
+}
+
+/* Border */
+.border {
+    border: solid black 2px;
+    border-radius: 25px;
+}
+
+.rounded{
+    border-radius: 25px;
+}
+
+/*Section*/
+.section-container {
+    display: flex;
+    height: 100%;
+    max-width: 1080px;
+}
+
+.section-container h1, .section-container h2 {
+    margin-bottom: 30px;
+}
+
+/*Article*/
+article {
+    margin: 5px 0;
+    display: flex;
+}
+
+/*Hero*/
+.hero-container {
+    display: flex;
+    width: 100%;
+    padding: 32px;
+}
+/*Container*/
+.container-row {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 100%;
+    min-width: none;
+    min-height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.container-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 50%;
+    min-width: 50%;
+    max-height: 400px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-col h2, .container-row h2 {
+    height: auto;
+    flex-shrink: 2;
+}
+
+
+.col-square{ /*NOT A TRUE SQUARE. NAMED SQUARE FOR SEMANTIC PURPOSES*/
+    border: solid black 3px;
+    border-radius: 25px;;
+    flex: 0 0 100%;
+    min-width: 100%;
+    height: 400px;
+    min-height: 250px;
+}
+.col-header{
+    display: flex;
+    height: 35%;
+    flex-shrink: 2;
+}
+.row-justify-start{
+    justify-content: flex-start;
+}
+.row-justify-evenly{
+    justify-content: space-evenly;
+}
+.row-gap{
+    gap: 4px;
+}
+
+.row-borderless{
+    border: none;
+}
+
+/* Button */
+.button-wrapper{
+    display:flex;
+    width: 32.94%; /*HIGHEST VALUE POSSIBLE BEFORE UGLY WRAPING*/
+    cursor:pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 300x300 IMG */
+.img300x300{
+    display: flex;
+    flex: 1 1;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+/* BACKGROUND COVER*/
+/*default, dark*/
+/* THIS CLASS STYLE CAN ONLY BE RUN INLINE BECAUSE PHP MUST ACCESS THE URL AND CHANGE IT*/
+.bg-cover {
+    color: white;
+    /*background-repeat: no-repeat;
+    background-size: cover;*/
+}
+
+/* MODAL */
+.modal{
+    background-color: rbga(0, 0, 0, 0.7);
+    border-radius: 25px;
+}
+
+/* FORM */
+.section-form{
+    display:flex;
+    flex: 1 1 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.section-form fieldset{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    min-height: 100px;
+    width: 80%;
+    max-width: 1080px;
+    margin: 4px;
+    border: none;
+}
+
+.section-form legend{
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.input-text{
+    width: 100%;
+}
+
+.input-submit{
+    border: none;
+    border-radius: 35px;
+    height: 74px;
+    width: 300px;
+    background-color: black;
+    color: white
+}
+
+.input-submit:hover{
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+.text-area{
+    resize: none;
+}
+
+
+    /*
+  *   MOBILE RESOLUTIONS
+  */
+
+@media (max-width:764px){
+    h1, h2{
+        align-self: center;
+    }
+    .border, .rounded {
+        border: none;
+        border-radius: 0;
+    }  
+    section{
+        margin-top:100px;
+    }
+    .section-container h1, .section-container h2 {
+        margin-bottom: 4px;
+    }
+    .hero-container{
+        flex-direction: column;
+        max-height: none;
+        padding: 8px;
+    }
+    .container-row{
+        flex-wrap: nowrap;
+        justify-content: center;
+        flex-direction: column;
+        flex: 1 1 100%;
+        min-width: 100%;
+        min-height: none;
+    }
+    .button-wrapper{
+        flex: 0 1;
+        width: 90%
+    }
+    .col-square{
+        flex: 1 1 100%;
+        width: 100%;
+    }
+    .container-col h2 {
+        height: auto;
+        margin-bottom: 8px;
+        flex-shrink: 0;
+    }
+    .container-col-img{
+        display:flex;
+        max-height: 200%;
+        flex-shrink: 2;
+        margin-top: 1rem;
+    }
+    .container-col img{
+        height:null;
+    }
+}

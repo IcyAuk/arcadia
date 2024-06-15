@@ -1,0 +1,208 @@
+/** ADMIN STYLE IS TOTALLY INDEPENDENT FROM THE REST OF THE WEBSITE **/
+/* DIVIDE THE VIEWPORT INTO TWO COLUMNS*/
+/* I want to avoid the spaghetti of the previous header/navbar and start anew */
+/* i don't know why my css always ends up like some sort of bootleg bootstrap */
+/*
+*   PLAN - DESKTOP
+*       cut the body in two vertical parts, header & main
+*       trying to use position absolute was a catastrophical failure
+*
+*
+*/
+
+/* font */
+*{
+    font-family: sans-serif;
+}
+
+/* global */
+.column{
+    flex-direction: column;
+}
+
+/* border */
+.border{
+    border: solid black 2px;
+}
+
+.border-rounded{
+    border-radius: 8px;
+}
+
+.border-rounder{
+    border-radius: 25px;
+}
+
+.border-brand{
+    border-radius: 25px 25px 8px 8px;
+}
+
+/* body */
+.body-container{
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 100%;
+    gap: 4px;
+    max-width: 1080px;
+
+    margin: 2vh auto;
+}
+
+.body-col{
+    display:flex;
+    flex-direction: column;
+    width: 300px;
+    flex: 1 1;
+    min-height: 95vh;
+    background-color: darkslateblue;
+}
+
+/* header */
+.col-header{
+    max-width: 14rem;
+    min-width: 12rem;
+    padding: 10px;
+    background-color: #222222;
+}
+.header-navbar-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: white;
+}
+.header-navbar-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    width: 100%;
+    padding: 4px;
+    color: black;
+    background-color: white;
+}
+.header-navbar-row:hover{
+    cursor: pointer;
+    color: white;
+    background-color: rgb(105, 105, 105);
+}
+.header-brand{
+    flex: 0 0;
+    height: 80px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    background-color: white;
+}
+#navbar-button{
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+/* main */
+.col-main{
+    flex: 1 1 100%;
+    padding: 3rem;
+}
+
+/* stuff inside of main */
+.container{
+    display:flex;
+    flex: 1 0 100%;
+    align-items: center;
+    background-color: lightblue;
+}
+
+.list-container{
+    display: flex;
+    flex-direction: column;
+    flex: 0 1;
+    gap: 10px;
+    width: 100%;
+}
+
+.read-list{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 20px;
+    border: solid black 2px;
+}
+
+/* *MOBILE RESOLUTIONS* */
+
+@media (min-width: 768px){
+    #navbar-button{
+        display: none;
+    }
+}
+
+@media (max-width: 767px){
+    /*making rounded separate was a mistake. get rid of it all in mobile version*/
+    .border-rounded, .border-rounder, .border-roundest{
+        border: 0;
+        border-radius: 0;
+    }
+
+    .border-brand{
+        border-end-end-radius: 0 ;
+        border-end-start-radius: 0 ;
+    }
+
+    body{
+        height: 100%;
+    }
+    .body-container{
+        flex-direction: column;
+        flex: 1 0;
+        margin: 0;
+    }
+    .body-col{
+        min-height: 0px;
+    }
+    .col-header{
+        display: flex;
+        flex: 0 1;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        max-width: 14rem;
+        min-width: 100vw;
+
+        padding: 10px;
+        background-color: #222222;
+    }
+    .header-navbar-col{
+        display: none;
+    }
+    .header-navbar-col.visible {
+        display: flex;
+    }
+    .header-navbar-row{
+        height: 60px;
+    }
+    .col-main{
+        display: flex;
+        margin-top: 5.9rem;
+        flex: 1 1 auto;
+        width: 100%;
+        padding: 2rem;
+        max-height: 999vh;
+    }
+
+    .container{
+        min-height:50vh;
+    }
+}
+
+    /* longdiv is longdiv. longdiv makes longdivs*/
+    .longdiv{
+        background-color: red;
+        width: 100px;
+        height: 200vh;
+    }
+
+.hidden{
+    display: none;
+}

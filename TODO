@@ -1,0 +1,1 @@
+add htmlspecialchars to varying html content pour eviter attacks XSS

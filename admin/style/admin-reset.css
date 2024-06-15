@@ -1,0 +1,17 @@
+/*
+*
+*
+*       ADMIN RESET STYLE --> GETS RID OF ANY SPAGHETTI CODE FOR HEADER ect
+*
+*
+*/
+
+header {
+    display: none;
+    flex: none;
+    align-self: none;
+    justify-content: none;
+    width: none;
+    max-width: none;
+
+}
