@@ -1,4 +1,5 @@
 <?php 
+
 //do not forget to include config.php wherever you include pdo.php
 
 //data source name
@@ -20,3 +21,5 @@ try
 {
     die("PDO.PHP -> error" . $e->getMessage());
 }
+
+// MACHINE (ADMIN CRUD)

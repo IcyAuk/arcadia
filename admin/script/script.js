@@ -13,6 +13,7 @@ xhr.onload = function(){
 // make li a clickable butotn, then send the data-url to xhr
 document.addEventListener("DOMContentLoaded", () => {
     const navItems = document.querySelectorAll(".header-navbar-row");
+    const navbarCol = document.querySelector(".header-navbar-col");
 
     navItems.forEach(item => {
         item.addEventListener("click", () => {
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (url) {
                 xhr.open("GET", url);
                 xhr.send();
+                navbarCol.classList.toggle("visible");
             }
         });
     });

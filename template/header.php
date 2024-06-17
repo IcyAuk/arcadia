@@ -1,8 +1,6 @@
 <?php
-    require_once "../lib/config.php";
-    require_once "../lib/pdo.php";
+    session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +18,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
+<?php require "lib/config.php"; ?>
+<?php require "lib/pdo.php"; ?>
+<?= $_SESSION["user_email"];
+    $_SESSION["user_id"];
+?>
     <header>
         <nav class="navbar">
             <a href="../home.php"><div class="brand-title">Arcadia</div></a>
@@ -34,9 +37,21 @@
                     <li><a href="../services.php">Services</a></li>
                     <li><a href="../habitats.php">Habitats</a></li>
                     <li><a href="../contact.php">Nous contacter</a></li>
+                    <?php if(isset($_SESSION["user_email"])){ ?>
+                    <li><a href="../admin/dashboard.php">Dashboard</a></li>
+                    <?php } ?>
                 </ul>
             </div>
-            <a href="../login.php" class="login-button">Connexion</a>
+
+                <?php if(isset($_SESSION["user_email"])){ ?>
+
+                    <a href="../logout.php" class="login-button">Déconnexion</a>
+
+                <?php } else { ?>
+
+                    <a href="../login.php" class="login-button">Connexion</a>
+
+                <?php } ?>
         </nav>
     </header>
     <main>
