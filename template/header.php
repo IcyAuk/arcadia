@@ -20,9 +20,7 @@
 <body>
 <?php require "lib/config.php"; ?>
 <?php require "lib/pdo.php"; ?>
-<?= $_SESSION["user_email"];
-    $_SESSION["user_id"];
-?>
+
     <header>
         <nav class="navbar">
             <a href="../home.php"><div class="brand-title">Arcadia</div></a>

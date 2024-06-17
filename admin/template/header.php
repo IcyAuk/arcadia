@@ -3,6 +3,11 @@
     require_once "../lib/config.php";
     require_once "../lib/pdo.php";
 
+    if(!isset($_SESSION["user_name"])) {
+        header("Location:../home.php");
+        exit();
+    }
+
 /*
     THIS HEADER WILL DISPLAY DIFFERENT TABS DEPENDING
     ON THE ROLE OF THE LOGGED-IN STAFF MEMBER

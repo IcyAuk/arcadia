@@ -6,7 +6,7 @@ xhr.onload = function(){
     if (this.status === 200){
         container.innerHTML = xhr.responseText;
     } else {
-        console.warn("Did not receive 200 Response")
+        console.warn("Did not receive 200 Response : data-url is wrong or missing")
     }
 }
 

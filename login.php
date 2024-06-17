@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $password = $_POST["login-pw"];
 
             //machine will look for that email, then for matching password
-            $stmt = $pdo->prepare('SELECT id, email, name, password FROM staff WHERE email = ?');
+            $stmt = $pdo->prepare('SELECT id, email, name, password, role FROM staff WHERE email = ?');
             $stmt->execute([$email]);
             $staff = $stmt->fetch();
 
@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION['user_id'] = $staff['id'];
                 $_SESSION['user_email'] = $staff['email'];
                 $_SESSION['user_name'] = $staff['name'];
+                $_SESSION['user_role'] = $staff['role'];
                 header("Location:admin/dashboard.php");
             } else {
                 echo "Invalid email or password.";
