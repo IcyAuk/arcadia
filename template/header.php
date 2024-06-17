@@ -1,3 +1,8 @@
+<?php
+    require_once "../lib/config.php";
+    require_once "../lib/pdo.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
