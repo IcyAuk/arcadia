@@ -1,11 +1,11 @@
 --FINAL ARCADIA
+-- MACHINE HAS NO RIGHT TO INITIALIZE THE DATABASE. RUN EVERYTHING AS ROOT.
+-- GET RID OF COMMENTS IF NEEDED
 
 --@block
--- RUN THIS BLOCK AS ROOT FIRST
--- GET RID OF COMMENTS IF NEEDED
 CREATE DATABASE IF NOT EXISTS arcadia_zoo;
 USE arcadia_zoo;
-CREATE USER 'arcadia_zoo_machine'@localhost IDENTIFIED BY '1234'; --machine is the web app
+CREATE USER 'arcadia_zoo_machine'@localhost IDENTIFIED BY '1234';
 GRANT SELECT, INSERT, UPDATE, DELETE ON arcadia_zoo.* TO 'arcadia_zoo_machine'@localhost;
 
 --@block
@@ -25,16 +25,15 @@ CREATE TABLE staff(
 );
 
 
---COMMENTS / CONTACT FORMS
+-- COMMENTS / CONTACT FORMS
 CREATE TABLE comments(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     visitor_id INT NOT NULL,
     visitor_username VARCHAR(255) NOT NULL,
     rating INT NOT NULL,
     comment TEXT NOT NULL,
-    status ENUM("pending","validated")
+    status ENUM("pending","validated"),
     FOREIGN KEY (visitor_id) REFERENCES visitors(id),
-    FOREIGN KEY (visitor_username) REFERENCES visitors(username)
 );
 
 CREATE TABLE contacts(
@@ -42,21 +41,21 @@ CREATE TABLE contacts(
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     subject VARCHAR(255) NOT NULL,
-    message TEXT NOT NULL,
+    message TEXT NOT NULL
 );
 
---ANIMALS / HABITATS
+-- ANIMALS / HABITATS
 
 CREATE TABLE habitats(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    imagePath TEXT NOT NULL,
+    imagePath TEXT NOT NULL
 );
 
 CREATE TABLE animals(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    habitat_id INT NULL, --si l'animal n'a pas encore d'habitat
+    habitat_id INT NULL,
     name VARCHAR(255) NOT NULL,
     species VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
@@ -92,15 +91,16 @@ CREATE TABLE animalImpressionCounter(
     FOREIGN KEY (animal_id) REFERENCES animals(id) ON DELETE CASCADE
 );
 
---HORAIRES
+-- HORAIRES
 
 CREATE TABLE schedule(
-    int INT PRIMARY KEY AUTO_INCREMENT,
-    day ENUM("lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"),
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    day ENUM("lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche") NOT NULL,
     ouverture TIME,
     fermeture TIME,
     is_closed TINYINT(1) DEFAULT 0,
-    UNIQUE KEY unique_day (day) --prevent duplicated days
+    -- prevent duplicated days
+    UNIQUE KEY unique_day (day)
 );
 
 -- SERVICES
@@ -108,6 +108,6 @@ CREATE TABLE services(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    imagePath TEXT NOT NULL,
+    imagePath TEXT NOT NULL
 );
 
