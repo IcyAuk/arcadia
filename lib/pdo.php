@@ -69,6 +69,7 @@ function createStaff(PDO $pdo, string $name, string $email, string $password, st
     $_POST = array(); //xhr doesn't reload page. machine purges $_POST manually.
 }
 
+//DELETE
 function deleteStaff(PDO $pdo, int $deleteId)
 {
     try {
@@ -89,6 +90,22 @@ function deleteService(PDO $pdo, int $deleteId)
 {
     try {
         $stmt = $pdo->prepare('DELETE FROM services WHERE id = :id');
+        $stmt->bindParam(':id', $deleteId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $currentUrl = strtok($_SERVER["REQUEST_URI"], '?'); //REMOVE GET FROM URL
+        header('Location: ' . $currentUrl);
+        exit;
+    } catch (PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
+        die();
+    }
+}
+
+function deleteHabitat(PDO $pdo, int $deleteId)
+{
+    try {
+        $stmt = $pdo->prepare('DELETE FROM habitats WHERE id = :id');
         $stmt->bindParam(':id', $deleteId, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -232,31 +249,8 @@ function createVetLog(PDO $pdo, int $vet_id, int $animal_id, string $proposed_fo
     $_POST = array(); // Clear POST data if needed
 }
 
-// IGNORE THIS IGNORE ITE IGNORE THIS IGNORE THIS
-function editService(PDO $pdo, $service_id, $title, $description, $image){
-
-    $service_id;
-    $title = sanitizeInput($title);
-    $description = htmlspecialchars($description);
-    $description = stripslashes($description);
-    $imagePath = imageHandler($pdo, $image);
-
-    $stmt = $pdo->prepare('UPDATE services SET title = :title,
-                                                description = :description,
-                                                imagePath = :imagePath)
-                                WHERE id = :service_id
-                            ');
-
-    $stmt->bindParam(':service_id', $service_id, FILTER_SANITIZE_NUMBER_INT);
-    $stmt->bindParam(':title', $title);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':imagePath', $imagePath);
-
-    try {
-        $stmt->execute();
-    } catch (PDOException $e) {
-        $e->getMessage();
-    }
-
-    $_POST = array();
+// UPDATE
+//services
+function updateService(){
+    return null;
 }

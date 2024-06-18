@@ -33,7 +33,7 @@ CREATE TABLE comments(
     rating INT NOT NULL,
     comment TEXT NOT NULL,
     status ENUM("pending","validated"),
-    FOREIGN KEY (visitor_id) REFERENCES visitors(id),
+    FOREIGN KEY (visitor_id) REFERENCES visitors(id)
 );
 
 CREATE TABLE contacts(
@@ -60,7 +60,7 @@ CREATE TABLE animals(
     species VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     imagePath TEXT,
-    FOREIGN KEY (habitat_id) REFERENCES habitats(id)
+    FOREIGN KEY (habitat_id) REFERENCES habitats(id) ON DELETE SET NULL
 );
 
 CREATE TABLE AnimalDietLog(

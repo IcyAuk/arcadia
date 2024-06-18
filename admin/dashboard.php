@@ -37,6 +37,9 @@ if (isset($_GET['delete_id']) && isset($_GET['param'])) {
         if ($param === 'rud_service') {
                 deleteService($pdo, $deleteId);
         }
+        if ($param === 'rud_habitat') {
+                deleteHabitat($pdo, $deleteId);
+        }
         elseif ($param === 'rd_staff') {
                 deleteStaff($pdo, $deleteId);
         }
