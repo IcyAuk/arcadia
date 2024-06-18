@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $description = $_POST['description'];
         $oldPath = $service['imagePath'];
 
-        // handle new file or keep old path
+        // bad image handler. don't forget to replace it with the real function
         if ($_FILES['new_image']['error'] === UPLOAD_ERR_OK) {
             $tmp_name = $_FILES['new_image']['tmp_name'];
             $new_image_path = "../uploads/" . $_FILES['new_image']['name'];
