@@ -38,7 +38,23 @@
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rd_staff.php">RD Staff</li>
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rd_vet.php">RD Vet</li>
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_staff.php">C Staff</li>
-            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_vet.php">C Vet</li>
+
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/UD_service.php">UD Service</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_service.php">C Service</li>
+
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/ud_habitat.php">UD habitat</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_habitat.php">C habitat</li>
+
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/ud_animal.php">UD animal</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_animal.php">C animal</li>
+
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rd_dietlog.php">RD Diet Log</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_dietlog.php">C Diet Log</li>
+
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rd_vetlog.php">RD Vet Log</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_vetlog.php">C Vet Log</li>
+
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/R_counter.php">Impression Counter</li>
         </ul>
     </header>
 

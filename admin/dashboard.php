@@ -9,8 +9,13 @@
 
 //CHECK POST, THEN CHECK WHO SENT THE POST METHOD
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if(isset($_POST["c_staff"])){
+        if(isset($_POST["c_staff"]))
+        {
                 createStaff($pdo, $_POST["name"], $_POST["email"], $_POST["password"], $_POST["role"]);
+        }
+        if(isset($_POST["c_service"]))
+        {
+                createService($pdo, $_POST["title"], $_POST["description"], $_FILES["image"]);
         }
 }
 
