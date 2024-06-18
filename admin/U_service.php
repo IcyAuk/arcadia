@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $new_image_path = $oldPath;
         }
-
+        //working cr U d code. abstract it to pdo later.
         try {
             $update_stmt = $pdo->prepare("UPDATE services SET title = :title, description = :description, imagePath = :imagePath WHERE id = :id");
             $update_stmt->bindParam(':title', $title, PDO::PARAM_STR);
