@@ -22,6 +22,7 @@ catch (PDOException $e)
     <?php foreach($services as $service): ?>
     <li class="read-list">
         <div><?= $service['title'] ?></div>
+        <div><a href="u_service.php?param=u_service&edit_id=<?= $service['id']; ?>">edit</a></div>
         <div><a href="?param=<?= urlencode('rud_service') ?>&delete_id=<?php echo $service['id']; ?>" onclick="return confirm('Suprimmer?')">suppr</a></div>
     </li>
     <?php endforeach; ?>

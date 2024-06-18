@@ -231,3 +231,32 @@ function createVetLog(PDO $pdo, int $vet_id, int $animal_id, string $proposed_fo
 
     $_POST = array(); // Clear POST data if needed
 }
+
+// IGNORE THIS IGNORE ITE IGNORE THIS IGNORE THIS
+function editService(PDO $pdo, $service_id, $title, $description, $image){
+
+    $service_id;
+    $title = sanitizeInput($title);
+    $description = htmlspecialchars($description);
+    $description = stripslashes($description);
+    $imagePath = imageHandler($pdo, $image);
+
+    $stmt = $pdo->prepare('UPDATE services SET title = :title,
+                                                description = :description,
+                                                imagePath = :imagePath)
+                                WHERE id = :service_id
+                            ');
+
+    $stmt->bindParam(':service_id', $service_id, FILTER_SANITIZE_NUMBER_INT);
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':imagePath', $imagePath);
+
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+
+    $_POST = array();
+}
