@@ -26,8 +26,7 @@ try {
 ?>
 
 <div id="container" class="container column">
-<h1>Edit Service</h1>
-    <form class="list-container" method="post" action="lib/update_service.php" enctype="multipart/form-data">
+    <form class="list-container" method="post" action="#" enctype="multipart/form-data">
         <input type="hidden" name="service_id" value="<?= $service['id'] ?>">
 
         <label for="title">titre</label>
@@ -54,8 +53,40 @@ try {
 
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['u_service']) && $_POST['u_service'] === 'u_service') {
+        // Process form data and update database
+        $service_id = $_POST['service_id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $oldPath = $service['imagePath'];
+
+        // handle new file or keep old path
+        if ($_FILES['new_image']['error'] === UPLOAD_ERR_OK) {
+            $tmp_name = $_FILES['new_image']['tmp_name'];
+            $new_image_path = "../uploads/" . $_FILES['new_image']['name'];
+            move_uploaded_file($tmp_name, $new_image_path);
+        } else {
+            $new_image_path = $oldPath;
+        }
+
+        try {
+            $update_stmt = $pdo->prepare("UPDATE services SET title = :title, description = :description, imagePath = :imagePath WHERE id = :id");
+            $update_stmt->bindParam(':title', $title, PDO::PARAM_STR);
+            $update_stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $update_stmt->bindParam(':imagePath', $new_image_path, PDO::PARAM_STR);
+            $update_stmt->bindParam(':id', $service_id, PDO::PARAM_INT);
+            $update_stmt->execute();
+
+            header("Location: dashboard.php");
+            exit();
+        } catch (PDOException $e) {
+            echo "Error updating service: " . $e->getMessage();
+            die();
+        }
+    } else {
+        echo "Invalid request";
+    }
 }
 
 require_once "./template/footer.php"; ?>
