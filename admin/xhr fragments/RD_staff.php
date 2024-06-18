@@ -23,7 +23,7 @@ catch (PDOException $e)
     <li class="read-list">
         <div><?= $staff['name'] ?></div>
         <div><?= $staff['email'] ?></div>
-        <div><a href="?delete_id=<?php echo $staff['id']; ?>" onclick="return confirm('Suprimmer?')">suppr</a></div>
+        <div><a href="?param=<?= urlencode('rd_staff') ?>&delete_id=<?php echo $staff['id']; ?>" onclick="return confirm('Suprimmer?')">suppr</a></div>
     </li>
     <?php endforeach; ?>
 </ul>

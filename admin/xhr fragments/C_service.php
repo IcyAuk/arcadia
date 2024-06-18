@@ -3,7 +3,7 @@
     <input type="text" name="title" id="title" required>
 
     <label for="description">description</label>
-    <input type="text" name="description" id="description">
+    <textarea name="description" id="description"></textarea>
 
     <label for="image">Upload Image</label>
     <input type="file" name="image" id="image">

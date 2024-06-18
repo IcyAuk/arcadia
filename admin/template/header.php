@@ -39,13 +39,13 @@
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rd_vet.php">RD Vet</li>
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_staff.php">C Staff</li>
 
-            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/UD_service.php">UD Service</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rud_service.php">RUD Service</li>
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_service.php">C Service</li>
 
-            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/ud_habitat.php">UD habitat</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rud_habitat.php">RUD habitat</li>
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_habitat.php">C habitat</li>
 
-            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/ud_animal.php">UD animal</li>
+            <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rud_animal.php">RUD animal</li>
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/c_animal.php">C animal</li>
 
             <li class="header-navbar-row border-rounded" data-url="./xhr fragments/rd_dietlog.php">RD Diet Log</li>

@@ -85,6 +85,23 @@ function deleteStaff(PDO $pdo, int $deleteId)
     }
 }
 
+function deleteService(PDO $pdo, int $deleteId)
+{
+    try {
+        $stmt = $pdo->prepare('DELETE FROM services WHERE id = :id');
+        $stmt->bindParam(':id', $deleteId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $currentUrl = strtok($_SERVER["REQUEST_URI"], '?'); //REMOVE GET FROM URL
+        header('Location: ' . $currentUrl);
+        exit;
+    } catch (PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
+        die();
+    }
+}
+
+
 //image handler
 function imageHandler(PDO $pdo, $image)
 {
@@ -103,7 +120,8 @@ function imageHandler(PDO $pdo, $image)
 function createService(PDO $pdo, string $title, string $description, $image)
 {
     $title = sanitizeInput($title);
-    $description = sanitizeInput($description);
+    $description = htmlspecialchars($description);
+    $description = stripslashes($description);
     $imagePath = imageHandler($pdo, $image);
 
     $stmt = $pdo->prepare('INSERT INTO services (title, description, imagePath)
@@ -117,8 +135,99 @@ function createService(PDO $pdo, string $title, string $description, $image)
     try {
         $stmt->execute();
     } catch (PDOException $e) {
-        $e->getMEssage();
+        $e->getMessage();
     }
 
     $_POST = array(); //xhr doesn't reload page. machine purges $_POST manually.
+}
+
+function createHabitat(PDO $pdo, string $name, string $description, $image)
+{
+    $name = sanitizeInput($name);
+    $description = htmlspecialchars($description);
+    $description = stripslashes($description);
+    $imagePath = imageHandler($pdo, $image);
+
+    $stmt = $pdo->prepare('INSERT INTO habitats (name, description, imagePath)
+                                VALUES (:name, :description, :imagePath)
+                            ');
+
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':imagePath', $imagePath);
+
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+
+    $_POST = array(); //xhr doesn't reload page. machine purges $_POST manually.
+}
+
+function createAnimal(PDO $pdo, string $name, int $habitat_id, string $description, $image){
+    $name = sanitizeInput($name);
+    $description = htmlspecialchars($description);
+    $description = stripslashes($description);
+    $imagePath = imageHandler($pdo, $image);
+
+    $stmt = $pdo->prepare('INSERT INTO animals (name, habitat_id, description, imagePath)
+                                VALUES (:name, :habitat_id, :description, :imagePath)
+                            ');
+
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':habitat_id', $habitat_id);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':imagePath', $imagePath);
+
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+
+    $_POST = array(); //xhr doesn't reload page. machine purges $_POST manually.
+}
+
+function createDietLog(PDO $pdo, int $animal_id, string $food, int $kilo){
+    $food = sanitizeInput($food);
+
+    $stmt = $pdo->prepare('INSERT INTO animalDietLog (animal_id, food, food_kilogram)
+                                VALUES (:animal_id, :food, :food_kilogram)
+                            ');
+
+    $stmt->bindParam(':animal_id', $animal_id, PDO::PARAM_INT);
+    $stmt->bindParam(':food', $food);
+    $stmt->bindParam(':food_kilogram', $kilo, PDO::PARAM_INT);
+
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+
+    $_POST = array(); //xhr doesn't reload page. machine purges $_POST manually.
+}
+
+function createVetLog(PDO $pdo, int $vet_id, int $animal_id, string $proposed_food, int $proposed_food_kilogram, ?string $detail) {
+    $proposed_food = sanitizeInput($proposed_food);
+    $detail = sanitizeInput($detail); // Ensure to sanitize detail if it's not null
+
+    $stmt = $pdo->prepare('INSERT INTO AnimalVetLog (vet_id, animal_id, proposed_food, proposed_food_kilogram, detail) 
+                            VALUES (:vet_id, :animal_id, :proposed_food, :proposed_food_kilogram, :detail)');
+    
+    $stmt->bindParam(':vet_id', $vet_id, PDO::PARAM_INT);
+    $stmt->bindParam(':animal_id', $animal_id, PDO::PARAM_INT);
+    $stmt->bindParam(':proposed_food', $proposed_food, PDO::PARAM_STR);
+    $stmt->bindParam(':proposed_food_kilogram', $proposed_food_kilogram, PDO::PARAM_INT);
+    $stmt->bindParam(':detail', $detail, PDO::PARAM_STR);
+
+    try {
+        $stmt->execute();
+        echo "Vet log successfully created.";
+    } catch (PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
+    }
+
+    $_POST = array(); // Clear POST data if needed
 }
