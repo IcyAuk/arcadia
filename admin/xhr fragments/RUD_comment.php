@@ -7,7 +7,7 @@
 <?php
 try
 {
-    $stmt = $pdo->query("SELECT id, visitor_username, comment FROM comments");
+    $stmt = $pdo->query("SELECT id, visitor_username, comment FROM comments WHERE status =");
     $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 catch (PDOException $e)
