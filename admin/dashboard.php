@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 createHabitat($pdo, $_POST["name"], $_POST["description"], $_FILES["image"]);
         }
         if (isset($_POST["c_animal"])) {
-                createAnimal($pdo, $_POST["name"], $_POST["habitat"],$_POST["description"], $_FILES["image"]);
+                createAnimal($pdo, $_POST["name"], $_POST["species"], $_POST["habitat"],$_POST["description"], $_FILES["image"]);
         }
         if (isset($_POST["c_dietlog"])) {
                 createDietLog($pdo, $_POST["animal_id"],$_POST["food"], $_POST["kilo"]);
@@ -39,6 +39,15 @@ if (isset($_GET['delete_id']) && isset($_GET['param'])) {
         }
         if ($param === 'rud_habitat') {
                 deleteHabitat($pdo, $deleteId);
+        }
+        if ($param === 'rud_animal') {
+                deleteAnimal($pdo, $deleteId);
+        }
+        if ($param === 'rd_dietLog') {
+                deleteDietLog($pdo, $deleteId);
+        }
+        if ($param === 'rd_vetLog') {
+                deleteVetLog($pdo, $deleteId);
         }
         elseif ($param === 'rd_staff') {
                 deleteStaff($pdo, $deleteId);

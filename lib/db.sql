@@ -103,6 +103,17 @@ CREATE TABLE schedule(
     UNIQUE KEY unique_day (day)
 );
 
+INSERT INTO schedule (day, ouverture, fermeture)
+    VALUES
+    ('lundi', '09:00:00', '17:00:00'),
+    ('mardi', '09:00:00', '17:00:00'),
+    ('mercredi', '09:00:00', '17:00:00'),
+    ('jeudi', '09:00:00', '17:00:00'),
+    ('vendredi', '09:00:00', '17:00:00'),
+    ('samedi', '09:00:00', '17:00:00'),
+    ('dimanche', '09:00:00', '17:00:00');
+
+
 -- SERVICES
 CREATE TABLE services(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

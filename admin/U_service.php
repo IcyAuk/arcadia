@@ -77,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $update_stmt->bindParam(':imagePath', $new_image_path, PDO::PARAM_STR);
             $update_stmt->bindParam(':id', $service_id, PDO::PARAM_INT);
             $update_stmt->execute();
-
             header("Location: dashboard.php");
             exit();
         } catch (PDOException $e) {

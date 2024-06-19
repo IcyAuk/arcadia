@@ -118,6 +118,54 @@ function deleteHabitat(PDO $pdo, int $deleteId)
     }
 }
 
+function deleteAnimal(PDO $pdo, int $deleteId)
+{
+    try {
+        $stmt = $pdo->prepare('DELETE FROM animals WHERE id = :id');
+        $stmt->bindParam(':id', $deleteId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $currentUrl = strtok($_SERVER["REQUEST_URI"], '?'); //REMOVE GET FROM URL
+        header('Location: ' . $currentUrl);
+        exit;
+    } catch (PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
+        die();
+    }
+}
+
+function deleteDietLog(PDO $pdo, int $deleteId)
+{
+    try {
+        $stmt = $pdo->prepare('DELETE FROM AnimalDietLog WHERE id = :id');
+        $stmt->bindParam(':id', $deleteId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $currentUrl = strtok($_SERVER["REQUEST_URI"], '?'); //REMOVE GET FROM URL
+        header('Location: ' . $currentUrl);
+        exit;
+    } catch (PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
+        die();
+    }
+}
+
+function deleteVetLog(PDO $pdo, int $deleteId)
+{
+    try {
+        $stmt = $pdo->prepare('DELETE FROM AnimalVetLog WHERE id = :id');
+        $stmt->bindParam(':id', $deleteId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $currentUrl = strtok($_SERVER["REQUEST_URI"], '?'); //REMOVE GET FROM URL
+        header('Location: ' . $currentUrl);
+        exit;
+    } catch (PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
+        die();
+    }
+}
+
 
 //image handler
 function imageHandler(PDO $pdo, $image)
@@ -182,26 +230,38 @@ function createHabitat(PDO $pdo, string $name, string $description, $image)
     $_POST = array(); //xhr doesn't reload page. machine purges $_POST manually.
 }
 
-function createAnimal(PDO $pdo, string $name, int $habitat_id, string $description, $image){
+function createAnimal(PDO $pdo, string $name, string $species, int $habitat_id, string $description, $image){
+
+    $pdo->beginTransaction(); //transaction: if this function fails, rolls back changes
+
     $name = sanitizeInput($name);
+    $species = sanitizeInput($species);
     $description = htmlspecialchars($description);
     $description = stripslashes($description);
     $imagePath = imageHandler($pdo, $image);
 
-    $stmt = $pdo->prepare('INSERT INTO animals (name, habitat_id, description, imagePath)
-                                VALUES (:name, :habitat_id, :description, :imagePath)
+    $stmt = $pdo->prepare('INSERT INTO animals (name, species, habitat_id, description, imagePath)
+                                VALUES (:name, :species, :habitat_id, :description, :imagePath)
                             ');
 
     $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':species', $species);
     $stmt->bindParam(':habitat_id', $habitat_id);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':imagePath', $imagePath);
+    $stmt->execute();
 
-    try {
-        $stmt->execute();
-    } catch (PDOException $e) {
-        $e->getMessage();
-    }
+    $animal_id = $pdo->lastInsertId(); //fetch id of inserted row, animals table
+
+    $stmt2 = $pdo->prepare('INSERT INTO animalImpressionCounter (animal_id)
+                                VALUES (:animal_id)
+                            ');
+    $stmt2->bindParam(':animal_id',$animal_id);
+    $stmt2->execute();
+
+    $pdo->commit(); //commit. if anything goes wrong, roll back
+
+
 
     $_POST = array(); //xhr doesn't reload page. machine purges $_POST manually.
 }

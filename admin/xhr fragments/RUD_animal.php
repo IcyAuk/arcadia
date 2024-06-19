@@ -23,7 +23,7 @@ catch (PDOException $e)
     <li class="read-list">
         <div><?= $animal['name'] ?></div>
         <div><a href="u_animal.php?param=u_service&edit_id=<?= $animal['id']; ?>">edit</a></div>
-        <div><a href="?param=<?= urlencode('rud_animal') ?>&update_id=<?php echo $animal['id']; ?>" onclick="return confirm('Suprimmer?')">suppr</a></div>
+        <div><a href="?param=rud_animal&delete_id=<?php echo $animal['id']; ?>" onclick="return confirm('Suprimmer?')">suppr</a></div>
     </li>
     <?php endforeach; ?>
 </ul>
